@@ -1,0 +1,112 @@
+.App {
+	background-color: #002b2f;
+	min-height: 100vh;
+	/* display: flex;*/
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(20px + 2vmin);
+	color: #002b2f;
+	width: 100%;
+	padding-right: 2%;
+}
+
+.navbar {
+	background-color: #1abb6f;
+	max-height: max-content;
+
+	width: 100%;
+	display: inline-flex !important;
+	padding: 1%;
+	font-size: 30px;
+	font-size: 3.5vw;
+	text-align: center;
+
+	font-weight: 700;
+}
+
+.navbar img {
+	padding-right: 20%;
+	max-width: 10%;
+	max-height: 10%;
+}
+
+.navbar text {
+	text-align: center;
+}
+
+.body {
+	flex-direction: row;
+	margin-top: 5%;
+	
+	display: flex;
+	margin-inline-start: 5%;
+}
+
+.map_image {
+	align-items: center;
+	justify-content: center;
+	margin-left: 5%;
+	width: 50px;
+	height: 50px;
+}
+
+.buttons {
+	/* background-color: #4caf50;  */
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	margin-top: 1%;
+	flex-direction: column;
+	display: flex;
+	margin-inline-start: 100px;
+	padding-left: 3%;
+}
+
+/* CSS */
+.button-36 {
+	background-image: linear-gradient(
+		92.88deg,
+		#4eda78 9.16%,
+		#148677 43.89%,
+		#17bba0 64.72%
+	);
+	border-radius: 20px;
+
+	color: #ffffff;
+	cursor: pointer;
+	font-family: "Inter UI", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+		"Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+		"Helvetica Neue", sans-serif;
+	font-weight: 500;
+	font-size: 30px;
+	width: 300px;
+	height: 100px;
+	text-align: center;
+	text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
+	transition: all 0.5s;
+	touch-action: manipulation;
+	margin-bottom: 20%;
+}
+
+.button-36:hover {
+	box-shadow: rgba(29, 179, 116, 0.5) 0 1px 30px;
+	transition-duration: 0.1s;
+}
+
+.list {
+	color: #ffffff;
+	border-color: #09b33c;
+	border-radius: 5%;
+	padding: 1%;
+	font-size: 35px;
+	margin-right: 5%;
+	border-style: groove;
+	padding-right: 2%;
+	background-color: #1abb6f;
+}
+
+.list_element {
+	border-color: #09b33c;
+	padding: 1%;
+}
