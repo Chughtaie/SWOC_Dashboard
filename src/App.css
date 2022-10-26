@@ -5,10 +5,10 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	font-size: calc(20px + 2vmin);
-	color: #002b2f;
+	font-size: 30px;
+	color: white;
 	width: 100%;
-	padding-right: 2%;
+	padding-right: 0%;
 }
 
 .navbar {
@@ -25,6 +25,25 @@
 	font-weight: 700;
 }
 
+.navv {
+	background-color: #1abb6f;
+	font-size: 40px;
+	width: 100%;
+}
+
+.navb {
+	display: flex;
+}
+
+.navbar button {
+	padding: 20px;
+	margin-left: 20px;
+	background-color: #1abb6f;
+	border-radius: 30px;
+	border: 0ch;
+	font-size: 30px;
+}
+
 .navbar img {
 	padding-right: 20%;
 	max-width: 10%;
@@ -33,12 +52,13 @@
 
 .navbar text {
 	text-align: center;
+	color: white;
 }
 
 .body {
 	flex-direction: row;
 	margin-top: 5%;
-	
+
 	display: flex;
 	margin-inline-start: 5%;
 }
@@ -59,8 +79,9 @@
 	margin-top: 1%;
 	flex-direction: column;
 	display: flex;
-	margin-inline-start: 100px;
-	padding-left: 3%;
+	margin-inline-start: 60px;
+	margin-inline-end: 60px;
+	padding-left: 1%;
 }
 
 /* CSS */
@@ -79,9 +100,9 @@
 		"Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
 		"Helvetica Neue", sans-serif;
 	font-weight: 500;
-	font-size: 30px;
-	width: 300px;
-	height: 100px;
+	font-size: 20px;
+	width: 200px;
+	height: 70px;
 	text-align: center;
 	text-shadow: rgba(0, 0, 0, 0.25) 0 3px 8px;
 	transition: all 0.5s;
@@ -103,10 +124,22 @@
 	margin-right: 5%;
 	border-style: groove;
 	padding-right: 2%;
+	height: auto;
 	background-color: #1abb6f;
 }
 
 .list_element {
 	border-color: #09b33c;
 	padding: 1%;
+}
+
+.table {
+	color: white;
+	background-color: #1abb6f;
+	margin: 30px;
+	max-width: 90%;
+}
+
+.leaflet-div-iconn {
+	background-color: none;
 }
