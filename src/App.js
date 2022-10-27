@@ -23,17 +23,6 @@ const mark = new L.Icon({
 	iconSize: new L.Point(40, 55),
 	className: "leaflet-div-iconn",
 });
-
-const binLocations = [
-	[33.6765861775585, 73.03936673659675],
-	[33.67777003432862, 73.01396972440627],
-	[33.65061547528435, 73.02524088532327],
-	[33.64783561289653, 72.95331076988744],
-	[33.66839027456748, 73.07530059035655],
-	//   [33.643616586980076, 72.28377792894402],
-];
-const truckLocations = [33.66754776310643, 73.0032501092188];
-const routes = [truckLocations].concat(binLocations);
 const truck = new L.Icon({
 	iconUrl: require("./logo.png"),
 	iconRetinaUrl: require("./logo.png"),
@@ -46,16 +35,35 @@ const truck = new L.Icon({
 	className: "leaflet-div-iconn",
 });
 
-function handleClick() {
-	alert("Hello!");
-}
+
+let binLocations = [
+	[33.6765861775585, 73.03936673659675],
+	[33.67777003432862, 73.01396972440627],
+	[33.65061547528435, 73.02524088532327],
+	[33.64783561289653, 72.95331076988744],
+	[33.66839027456748, 73.07530059035655],
+	//   [33.643616586980076, 72.28377792894402],
+];
+const truckLocations = [33.66754776310643, 73.0032501092188];
+const routes = [truckLocations].concat(binLocations);
+
+
+
 
 function App() {
+
+
 	const [volume, setVolume] = useState(1);
 	const [muted, setMuted] = useState(false);
+  const [routeStatus, setRouteStatus] = useState(false);
 
-	const finalVolume = muted ? 0 : volume ** 1;
-	return (
+  const finalVolume = muted ? 0 : volume ** 1;
+  function handleClick() {
+    setRouteStatus(!routeStatus);
+  }
+
+
+  return (
 		<div className="App">
 			<Navbar className="navv">
 				<Container>
@@ -83,7 +91,8 @@ function App() {
 						attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
 					/>
 
-					{routes.map((row, index) => {
+					{routeStatus  &&  
+            routes.map((row, index) => {
 						if (index < routes.length - 1)
 							return (
 								<Routing
@@ -97,7 +106,9 @@ function App() {
 									}}
 								/>
 							);
-					})}
+					})
+          
+          }
 					{binLocations.map((item) => {
 						return (
 							<Marker
