@@ -5,6 +5,8 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Routing from "./RoutingMachine";
+import { Routes, Route, useNavigate } from "react-router-dom";
+
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -35,7 +37,6 @@ const truck = new L.Icon({
 	className: "leaflet-div-iconn",
 });
 
-
 let binLocations = [
 	[33.6765861775585, 73.03936673659675],
 	[33.67777003432862, 73.01396972440627],
@@ -47,32 +48,56 @@ let binLocations = [
 const truckLocations = [33.66754776310643, 73.0032501092188];
 const routes = [truckLocations].concat(binLocations);
 
-
-
-
 function App() {
-
-
 	const [volume, setVolume] = useState(1);
 	const [muted, setMuted] = useState(false);
-  const [routeStatus, setRouteStatus] = useState(false);
+	const [routeStatus, setRouteStatus] = useState(false);
 
-  const finalVolume = muted ? 0 : volume ** 1;
-  function handleClick() {
-    setRouteStatus(!routeStatus);
-  }
+	const finalVolume = muted ? 0 : volume ** 1;
+	function handleClick() {
+		setRouteStatus(!routeStatus);
+	}
 
+	// function notify() {
+	// 	const options = {
+	// 		method: "POST",
+	// 		headers: {
+	// 			accept: "application/json",
+	// 			Authorization: "Basic REST_API_KEY",
+	// 			"content-type": "application/json",
+	// 		},
+	// 		body: JSON.stringify({
+	// 			included_segments: ["'429f9833-04e1-4c2e-95ea-8b07944e90fe'"],
+	// 			contents: {
+	// 				en: "English or Any Language Message",
+	// 				es: "Spanish Message",
+	// 			},
+	// 			name: "INTERNAL_CAMPAIGN_NAME",
+	// 		}),
+	// 	};
 
-  return (
+	// 	fetch("https://onesignal.com/api/v1/notifications", options)
+	// 		.then((response) => response.json())
+	// 		.then((response) => console.log(response))
+	// 		.catch((err) => console.error(err));
+	// }
+
+	// const navigate = useNavigate();
+	// const navigateToContacts = () => {
+	// 	// 👇️ navigate to /contacts
+	// 	navigate("/contacts");
+	// };
+
+	return (
 		<div className="App">
 			<Navbar className="navv">
 				<Container>
 					SWOC Dashboard
 					<Nav>
 						<div className="navb">
-							<Nav.Link href="#home">Trucks</Nav.Link>
-							<Nav.Link href="#features">Bins</Nav.Link>
-							<Nav.Link href="#pricing">Home</Nav.Link>
+							<Nav.Link href="/">Home</Nav.Link>
+							<Nav.Link href="./trucks">Trucks</Nav.Link>
+							<Nav.Link href="./bins">Bins</Nav.Link>
 						</div>
 					</Nav>
 				</Container>
@@ -91,24 +116,22 @@ function App() {
 						attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
 					/>
 
-					{routeStatus  &&  
-            routes.map((row, index) => {
-						if (index < routes.length - 1)
-							return (
-								<Routing
-									source={{
-										lat: routes[index][0],
-										lng: routes[index][1],
-									}}
-									destination={{
-										lat: routes[index + 1][0],
-										lng: routes[index + 1][1],
-									}}
-								/>
-							);
-					})
-          
-          }
+					{routeStatus &&
+						routes.map((row, index) => {
+							if (index < routes.length - 1)
+								return (
+									<Routing
+										source={{
+											lat: routes[index][0],
+											lng: routes[index][1],
+										}}
+										destination={{
+											lat: routes[index + 1][0],
+											lng: routes[index + 1][1],
+										}}
+									/>
+								);
+						})}
 					{binLocations.map((item) => {
 						return (
 							<Marker
