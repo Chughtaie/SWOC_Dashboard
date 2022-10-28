@@ -9,8 +9,11 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Table from "react-bootstrap/Table";
+import {User, LatLng} from './User';
+
 
 const center = [33.6765861775585, 73.03936673659675];
+
 const mark = new L.Icon({
 	iconUrl: require("./bin.png"),
 	iconRetinaUrl: require("./bin.png"),
@@ -34,6 +37,17 @@ const truck = new L.Icon({
 	iconSize: new L.Point(105, 65),
 	className: "leaflet-div-iconn",
 });
+const dump = new L.Icon({
+	iconUrl: require("./dump.jpg"),
+	iconRetinaUrl: require("./dump.jpg"),
+	iconAnchor: null,
+	popupAnchor: null,
+	shadowUrl: null,
+	shadowSize: null,
+	shadowAnchor: null,
+	iconSize: new L.Point(105, 65),
+	className: "leaflet-div-iconn",
+});
 
 
 let binLocations = [
@@ -44,8 +58,32 @@ let binLocations = [
 	[33.66839027456748, 73.07530059035655],
 	//   [33.643616586980076, 72.28377792894402],
 ];
-const truckLocations = [33.66754776310643, 73.0032501092188];
-const routes = [truckLocations].concat(binLocations);
+const truckLocation = [33.66754776310643, 73.0032501092188];
+const routes = [truckLocation].concat(binLocations);
+
+
+
+let binLocations1 = [
+	new LatLng(33.6765861775585, 73.04936673659675),
+	new LatLng(33.67777003432862, 73.01396972440627),
+	new LatLng(33.67061547528435, 73.02524088532327),
+	//   [33.643616586980076, 72.28377792894402],
+];
+let truckLocation1 = new LatLng(33.66754776310643, 73.0032501092188);
+let dumpLocation1 = new LatLng(33.65587833607018, 73.01529982582935);
+
+let binLocations2 = [
+	new LatLng(33.643400669121654, 73.03819428134942),
+	new LatLng(33.64739885700077, 73.04780135111022),
+	new LatLng(33.65608413183324, 73.03894522856845),
+	new LatLng(33.64996082749912, 73.02813687261715),
+	
+	
+];
+let truckLocation2 = new LatLng(33.64164914863834, 73.0133526510627);
+let dumpLocation2 = new LatLng(33.650522482199285, 73.02063102703364);
+	
+let users = [new User(truckLocation1,binLocations1,dumpLocation1),new User(truckLocation2,binLocations2,dumpLocation2)];
 
 
 
@@ -53,30 +91,37 @@ const routes = [truckLocations].concat(binLocations);
 function App() {
 
 
-	const [volume, setVolume] = useState(1);
-	const [muted, setMuted] = useState(false);
-  const [routeStatus, setRouteStatus] = useState(false);
+const [volume, setVolume] = useState(1);
+const [muted, setMuted] = useState(false);
+const [routeStatus, setRouteStatus] = useState(false);
+const finalVolume = muted ? 0 : volume ** 1;
 
-  const finalVolume = muted ? 0 : volume ** 1;
-  function handleClick() {
+
+function handleClick() {
     setRouteStatus(!routeStatus);
-  }
+	}
 
 
   return (
 		<div className="App">
 			<Navbar className="navv">
-				<Container>
-					SWOC Dashboard
-					<Nav>
-						<div className="navb">
-							<Nav.Link href="#home">Trucks</Nav.Link>
-							<Nav.Link href="#features">Bins</Nav.Link>
-							<Nav.Link href="#pricing">Home</Nav.Link>
-						</div>
-					</Nav>
-				</Container>
+					SWOC
+
 			</Navbar>
+			{/* <div class="bg-green-800">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<a class="navbar-brand" href="#">SWOC</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+					<a class="nav-item nav-link active" href="#">Trucks <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link" href="#">Bins</a>
+					</div>
+				</div>
+			</nav>
+			</div> */}
 
 			<br />
 
@@ -91,40 +136,69 @@ function App() {
 						attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
 					/>
 
-					{routeStatus  &&  
-            routes.map((row, index) => {
-						if (index < routes.length - 1)
+					{routeStatus  &&
+
+					  users.map((element)=>{return element.routes.map((row, index) => {
+						if (index < element.routes.length - 1)
 							return (
 								<Routing
 									source={{
-										lat: routes[index][0],
-										lng: routes[index][1],
+										lat: element.routes[index].lat,
+										lng: element.routes[index].lng,
 									}}
 									destination={{
-										lat: routes[index + 1][0],
-										lng: routes[index + 1][1],
+										lat: element.routes[index + 1].lat,
+										lng: element.routes[index + 1].lng,
+									}}
+									
+								/>
+							);
+					})})
+					 
+						/* element.routes.map((row, index) => {
+						if (index < element.routes.length - 1)
+							return (
+								<Routing
+									source={{
+										lat: element.routes[index].lat,
+										lng: element.routes[index].lng,
+									}}
+									destination={{
+										lat: element.routes[index + 1].lat,
+										lng: element.routes[index + 1].lng,
 									}}
 								/>
 							);
-					})
-          
-          }
-					{binLocations.map((item) => {
+					}) */
+        	  }
+					{
+						users.map((element)=>{return element.binLocs.map((item) => {
 						return (
 							<Marker
 								icon={mark}
-								position={[item[0], item[1]]}
+								position={[item.lat, item.lng]}
 								style="ba"
 								className="leaflet-div-iconn"
 							></Marker>
 						);
-					})}
-					{
-						<Marker
+					}
+					)}
+					)
+					}
+
+					{users.map((element)=>{return <Marker
 							icon={truck}
-							position={truckLocations}
+							position={[element.truckLoc.lat,element.truckLoc.lng]}
 							style="ba"
-						></Marker>
+						></Marker> })
+						
+					}
+					{users.map((element)=>{return <Marker
+							icon={dump}
+							position={[element.dumpLoc.lat,element.dumpLoc.lng]}
+							style="ba"
+						></Marker> })
+						
 					}
 				</MapContainer>
 

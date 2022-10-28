@@ -3,13 +3,19 @@ import L from "leaflet";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import "leaflet-routing-machine";
 import { useMap } from "react-leaflet";
+import useGenerateRandomColor 
+    from "./useRandomColor";
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png"
 });
 
-  const Routing = ({ source, destination }) => {
-  const map = useMap();
+
+
+
+const Routing = ({ source, destination }) => {
+  const color = (Math.random().toString(16).substr(-6));
+ const map = useMap();
 
     useEffect(() => {
       if (!map) return;
@@ -22,7 +28,7 @@ L.Marker.prototype.options.icon = L.icon({
           ],
           routeWhileDragging: true,
           lineOptions: {
-            styles: [{ color: "#17458A", weight: 4 }]
+            styles: [{ color: '#'+color, weight: 4 }]
           },
           show: false,
           showAlternatives: false,

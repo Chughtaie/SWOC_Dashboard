@@ -1,5 +1,5 @@
 .App {
-	background-color: #002b2f;
+	background-color: #000000;
 	min-height: 100vh;
 	/* display: flex;*/
 	flex-direction: row;
@@ -12,7 +12,7 @@
 }
 
 .navbar {
-	background-color: #1abb6f;
+	background-color: #ffffff;
 	max-height: max-content;
 
 	width: 100%;
@@ -26,9 +26,11 @@
 }
 
 .navv {
-	background-color: #1abb6f;
+	background-color: #036236;
 	font-size: 40px;
-	width: 100%;
+	/* width: 100%; */
+	align-content: space-between;
+	font-style: italic;
 }
 
 .navb {
@@ -58,7 +60,6 @@
 .body {
 	flex-direction: row;
 	margin-top: 5%;
-
 	display: flex;
 	margin-inline-start: 5%;
 }
