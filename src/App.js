@@ -70,7 +70,7 @@ function App() {
 					SWOC Dashboard
 					<Nav>
 						<div className="navb">
-							<Nav.Link href="#home">Trucks</Nav.Link>
+							<Nav.Link href="#homee">Trucks</Nav.Link>
 							<Nav.Link href="#features">Bins</Nav.Link>
 							<Nav.Link href="#pricing">Home</Nav.Link>
 						</div>
