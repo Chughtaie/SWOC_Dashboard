@@ -106,7 +106,7 @@ function handleClick() {
   return (
 		<div className="App">
 			<Navbar className="navv">
-					SWOC
+SWOC
 
 			</Navbar>
 			{/* <div class="bg-green-800">
