@@ -7,10 +7,10 @@ import L from "leaflet";
 import Routing from "./RoutingMachine";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Table from "react-bootstrap/Table";
-import {User, LatLng} from './User';
-
+import Navbar from "./components/navbar_component";
+import { User, LatLng } from "./User";
+import Table from "./components/table_component";
+import MyMapContainer from "./components/mapcontainer_component";
 
 const center = [33.6765861775585, 73.03936673659675];
 
@@ -38,8 +38,8 @@ const truck = new L.Icon({
 	className: "leaflet-div-iconn",
 });
 const dump = new L.Icon({
-	iconUrl: require("./dump.jpg"),
-	iconRetinaUrl: require("./dump.jpg"),
+	iconUrl: require("./dump.png"),
+	iconRetinaUrl: require("./dump.png"),
 	iconAnchor: null,
 	popupAnchor: null,
 	shadowUrl: null,
@@ -48,7 +48,6 @@ const dump = new L.Icon({
 	iconSize: new L.Point(105, 65),
 	className: "leaflet-div-iconn",
 });
-
 
 let binLocations = [
 	[33.6765861775585, 73.03936673659675],
@@ -61,13 +60,11 @@ let binLocations = [
 const truckLocation = [33.66754776310643, 73.0032501092188];
 const routes = [truckLocation].concat(binLocations);
 
-
-
 let binLocations1 = [
 	new LatLng(33.67777003432862, 73.01396972440627),
 	new LatLng(33.6765861775585, 73.04936673659675),
 	new LatLng(33.67061547528435, 73.02524088532327),
-	
+
 	//   [33.643616586980076, 72.28377792894402],
 ];
 let truckLocation1 = new LatLng(33.66754776310643, 73.0032501092188);
@@ -78,37 +75,32 @@ let binLocations2 = [
 	new LatLng(33.64739885700077, 73.04780135111022),
 	new LatLng(33.65608413183324, 73.03894522856845),
 	new LatLng(33.64996082749912, 73.02813687261715),
-	
-	
 ];
 let truckLocation2 = new LatLng(33.64164914863834, 73.0133526510627);
 let dumpLocation2 = new LatLng(33.650522482199285, 73.02063102703364);
-	
-let users = [new User(truckLocation1,binLocations1,dumpLocation1),new User(truckLocation2,binLocations2,dumpLocation2)];
 
-
-
+let users = [
+	new User(truckLocation1, binLocations1, dumpLocation1),
+	new User(truckLocation2, binLocations2, dumpLocation2),
+];
 
 function App() {
+	const [volume, setVolume] = useState(1);
+	const [volume2, setVolume2] = useState(1);
+	const [muted, setMuted] = useState(false);
+	const [muted2, setMuted2] = useState(false);
 
-
-const [volume, setVolume] = useState(1);
-const [muted, setMuted] = useState(false);
-const [routeStatus, setRouteStatus] = useState(false);
-const finalVolume = muted ? 0 : volume ** 1;
-
-
-function handleClick() {
-    setRouteStatus(!routeStatus);
+	const [routeStatus, setRouteStatus] = useState(false);
+	const finalVolume = muted ? 0 : volume ** 1;
+	const finalVolume2 = muted ? 0 : volume2 ** 1;
+	function handleClick() {
+		setRouteStatus(!routeStatus);
 	}
 
-
-  return (
+	return (
 		<div className="App">
-			<Navbar className="navv">
-					SWOC
+			<Navbar title="SWOC" logoUrl="/logo.png" selectedTab="about" />
 
-			</Navbar>
 			{/* <div class="bg-green-800">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<a class="navbar-brand" href="#">SWOC</a>
@@ -127,142 +119,75 @@ function handleClick() {
 			<br />
 
 			<div className="body">
-				<MapContainer
-					center={center}
-					zoom={16}
-					style={{ width: "200vw", height: "100vh" }}
-				>
-					<TileLayer
-						url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=67tzsplQZ74XQ5pgVnPj"
-						attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+				<div className="mapdiv">
+					<MyMapContainer
+						center={center}
+						routeStatus={routeStatus}
+						users={users}
+						mark={mark}
+						truck={truck}
+						dump={dump}
 					/>
+				</div>
+				<div className="outlined-div">
+					<div className="buttons">
+						<button className="button-36" onClick={handleClick}>
+							Run Optimization
+						</button>
 
-					{routeStatus  &&
+						<div className="outlined-div2">
+							<p
+								style={{
+									color: "#ffff",
+									fontStyle: "Bold",
+									fontFamily: "Arial",
+								}}
+							>
+								Threshold
+							</p>
 
-					  users.map((element)=>{return element.routes.map((row, index) => {
-						if (index < element.routes.length - 1)
-							return (
-								<Routing
-									source={{
-										lat: element.routes[index].lat,
-										lng: element.routes[index].lng,
-									}}
-									destination={{
-										lat: element.routes[index + 1].lat,
-										lng: element.routes[index + 1].lng,
-									}}
-									
-								/>
-							);
-					})})
-					 
-						/* element.routes.map((row, index) => {
-						if (index < element.routes.length - 1)
-							return (
-								<Routing
-									source={{
-										lat: element.routes[index].lat,
-										lng: element.routes[index].lng,
-									}}
-									destination={{
-										lat: element.routes[index + 1].lat,
-										lng: element.routes[index + 1].lng,
-									}}
-								/>
-							);
-					}) */
-        	  }
-					{
-						users.map((element)=>{return element.binLocs.map((item) => {
-						return (
-							<Marker
-								icon={mark}
-								position={[item.lat, item.lng]}
-								style="ba"
-								className="leaflet-div-iconn"
-							></Marker>
-						);
-					}
-					)}
-					)
-					}
+							<input
+								type="range"
+								min={0}
+								max={100}
+								step={2}
+								value={volume}
+								onChange={(event) => {
+									setVolume(event.target.valueAsNumber);
+								}}
+							/>
+							{finalVolume.toFixed(1) + " %"}
+						</div>
+						<hr className="custom-line" />
 
-					{users.map((element)=>{return <Marker
-							icon={truck}
-							position={[element.truckLoc.lat,element.truckLoc.lng]}
-							style="ba"
-						></Marker> })
-						
-					}
-					{users.map((element)=>{return <Marker
-							icon={dump}
-							position={[element.dumpLoc.lat,element.dumpLoc.lng]}
-							style="ba"
-						></Marker> })
-						
-					}
-				</MapContainer>
+						<div className="outlined-div2">
+							<p
+								style={{
+									color: "#ffff",
+									fontStyle: "Bold",
+									fontFamily: "Arial",
+								}}
+							>
+								Number of Bins
+							</p>
 
-				<div className="buttons">
-					<button className="button-36" onClick={handleClick}>
-						Run Optimization
-					</button>
-					<br />
-					<p
-						style={{
-							color: "#ffff",
-							fontStyle: "Bold",
-							fontFamily: "Arial",
-						}}
-					>
-						Set Threshold
-					</p>
-
-					<input
-						type="range"
-						min={0}
-						max={100}
-						step={2}
-						value={volume}
-						onChange={(event) => {
-							setVolume(event.target.valueAsNumber);
-						}}
-					/>
-					{finalVolume.toFixed(1)}
+							<input
+								type="range"
+								min={0}
+								max={100}
+								step={2}
+								value={volume2}
+								onChange={(event) => {
+									setVolume2(event.target.valueAsNumber);
+								}}
+							/>
+							{finalVolume2.toFixed(0)}
+						</div>
+					</div>
 				</div>
 			</div>
-			<div className="table">
-				<Table>
-					<thead>
-						<tr>
-							<th>Truck ID #</th>
-							<th>Optimized Path</th>
-							<th>Distance</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>12394</td>
-							<td>20</td>
-							<td>Details</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>12394</td>
-							<td>20</td>
-							<td>Details</td>
-						</tr>
-
-						<tr>
-							<td>3</td>
-							<td>12394</td>
-							<td>20</td>
-							<td>Details</td>
-						</tr>
-					</tbody>
-				</Table>
+			<div>
+				<Table />
 			</div>
 			<div> .</div>
 		</div>

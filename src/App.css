@@ -1,5 +1,5 @@
 .App {
-	background-color: #000000;
+	background-color: #c7f9cc;
 	min-height: 100vh;
 	/* display: flex;*/
 	flex-direction: row;
@@ -8,6 +8,7 @@
 	font-size: 30px;
 	color: white;
 	width: 100%;
+	overflow: hidden;
 	padding-right: 0%;
 }
 
@@ -26,7 +27,7 @@
 }
 
 .navv {
-	background-color: #036236;
+	background-color: #38a3a5;
 	font-size: 40px;
 	/* width: 100%; */
 	align-content: space-between;
@@ -64,6 +65,43 @@
 	margin-inline-start: 5%;
 }
 
+.outlined-div {
+	border: 5px solid rgb(32, 32, 32);
+	border-radius: 20px;
+	text-align: center;
+	text-decoration: none;
+	flex-direction: column;
+	display: flex;
+	margin-inline-start: 60px;
+	margin-inline-end: 60px;
+	padding: 1%;
+}
+.outlined-div2 {
+	border: 5px solid rgb(22, 22, 22);
+	border-radius: 20px;
+	text-align: center;
+	background-color: #111111;
+	text-decoration: none;
+	flex-direction: column;
+	display: flex;
+	margin: 1%;
+	padding: 1%;
+}
+
+/* .bordered-mapcontainer {
+	border: 20px solid rgb(153, 255, 0);
+	border-radius: 20px;
+} */
+
+.mapdiv {
+	flex-direction: row;
+	padding: 10px;
+	background-color: #252424;
+	border-radius: 10px;
+	display: flex;
+	width: 70%;
+}
+
 .map_image {
 	align-items: center;
 	justify-content: center;
@@ -77,11 +115,10 @@
 	color: white;
 	text-align: center;
 	text-decoration: none;
-	margin-top: 1%;
+	margin-top: 10%;
 	flex-direction: column;
 	display: flex;
-	margin-inline-start: 60px;
-	margin-inline-end: 60px;
+
 	padding-left: 1%;
 }
 
@@ -89,7 +126,7 @@
 .button-36 {
 	background-image: linear-gradient(
 		92.88deg,
-		#4eda78 9.16%,
+		#148677 9.16%,
 		#148677 43.89%,
 		#17bba0 64.72%
 	);
@@ -109,6 +146,8 @@
 	transition: all 0.5s;
 	touch-action: manipulation;
 	margin-bottom: 20%;
+	margin-inline-start: 60px;
+	margin-inline-end: 60px;
 }
 
 .button-36:hover {
@@ -116,6 +155,12 @@
 	transition-duration: 0.1s;
 }
 
+hr {
+	border: 0;
+	height: 5px;
+	background-color: #333;
+	width: 100%;
+}
 .list {
 	color: #ffffff;
 	border-color: #09b33c;
@@ -138,9 +183,13 @@
 	color: white;
 	background-color: #1abb6f;
 	margin: 30px;
-	max-width: 90%;
+	margin-left: 50px;
+	max-width: 95%;
 }
 
 .leaflet-div-iconn {
 	background-color: none;
+}
+.leaflet-container {
+	border-radius: inherit;
 }

@@ -1,0 +1,27 @@
+.table {
+	width: 40%;
+	border-collapse: collapse;
+	border-radius: 6px;
+	border: 5px solid rgb(53, 53, 53);
+	font-size: 18px;
+}
+
+.table-row {
+	border-bottom: 1px solid #ddd;
+	border-radius: 50px;
+}
+
+.table-cell {
+	padding: 10px;
+	text-align: left;
+	vertical-align: middle;
+	border-radius: 50px;
+}
+
+.table-header {
+	font-weight: bold;
+	color: rgb(255, 255, 255);
+	background-color: #00160c;
+	border-bottom: 2px solid #ddd;
+	width: min-content;
+}
