@@ -2,13 +2,7 @@ import "../App.css";
 import React, { useState, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
 import Routing from "../RoutingMachine";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "../components/navbar_component";
-import { User, LatLng } from "../User";
-import Table from "../components/table_component";
 function MyMapContainer(props) {
 	return (
 		<MapContainer
@@ -21,6 +15,7 @@ function MyMapContainer(props) {
 				attribution='<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
 			/>
 
+			{/* TO print routes */}
 			{props.routeStatus &&
 				props.users.map((element) => {
 					return element.routes.map((row, index) => {
@@ -38,7 +33,9 @@ function MyMapContainer(props) {
 								/>
 							);
 					});
-				})}
+				})
+			}
+			{/* TO print bins */}
 			{props.users.map((element) => {
 				return element.binLocs.map((item) => {
 					return (
@@ -51,7 +48,7 @@ function MyMapContainer(props) {
 					);
 				});
 			})}
-
+			{/* TO print trucka */}
 			{props.users.map((element) => {
 				return (
 					<Marker
@@ -61,6 +58,7 @@ function MyMapContainer(props) {
 					></Marker>
 				);
 			})}
+			{/* TO print dump sites */}
 			{props.users.map((element) => {
 				return (
 					<Marker
