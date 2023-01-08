@@ -6,7 +6,7 @@ function BinsTable() {
 	var kl;
 
 	useEffect(() => {
-		fetch("http://localhost:5000/bindata")
+		fetch("http://localhost:9000/bindata")
 			.then((res) => res.json())
 			.then((data) => setMessage(data.message));
 	}, []);

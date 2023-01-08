@@ -98,10 +98,49 @@ function Home() {
 	var kl;
 
 	useEffect(() => {
-		fetch("http://localhost:5000/bindata")
+		fetch("http://localhost:6000/bindata")
 			.then((res) => res.json())
 			.then((data) => setMessage(data.message));
 	}, []);
+
+	const [route, setdata] = useState({});
+
+	useEffect(() => {
+		// Using fetch to fetch the api from
+		// flask server it will be redirected to proxy
+
+		fetch("/home").then((res) =>
+			res.json().then((data) => {
+				// Setting a data from api
+				setdata({
+					route: data.routes,
+				});
+
+				console.log(data);
+				console.log(data);
+
+				let bins = [];
+				let truck = new LatLng(
+					data["routes"]["bins"][0]["lat"],
+					data["routes"]["bins"][0]["lon"]
+				);
+				console.log(data["routes"]["bins"].length);
+				for (let i = 1; i < data["routes"]["bins"].length; i++) {
+					//console.log(data['routes']['bins'][i])
+					let lan = new LatLng(
+						data["routes"]["bins"][i]["lat"],
+						data["routes"]["bins"][i]["lon"]
+					);
+					// console.log(lan)
+					bins.push(lan);
+				}
+				//let dump = bins.pop
+				users = [new User(truck, bins, truck)];
+				console.log(users);
+			})
+		);
+	}, []);
+	console.log(route);
 
 	// let jsonString = JSON.stringify(message);
 	// const data = JSON.parse(jsonString);

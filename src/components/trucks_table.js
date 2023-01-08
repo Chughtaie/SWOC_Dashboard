@@ -6,7 +6,7 @@ function TrucksTable() {
 	var kl;
 
 	useEffect(() => {
-		fetch("http://localhost:5000/truckdata")
+		fetch("http://localhost:9000/truckdata")
 			.then((res) => res.json())
 			.then((data) => setMessage(data.message));
 	}, []);
