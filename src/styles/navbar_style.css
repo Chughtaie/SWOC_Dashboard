@@ -22,7 +22,10 @@
 
 .navbar-options {
 	list-style: none;
+	color: #fff;
+	background-color: #fff;
 	display: flex;
+
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 100;
 	justify-content: space-between;

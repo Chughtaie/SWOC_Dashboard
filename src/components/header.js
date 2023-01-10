@@ -53,6 +53,7 @@ function Header(props) {
 						style={{
 							marginRight: "5rem",
 							fontFamily: "Segoe UI",
+							color: "white",
 							fontWeight: "500",
 						}}
 					>
@@ -65,6 +66,8 @@ function Header(props) {
 						style={{
 							marginRight: "5rem",
 							fontFamily: "Segoe UI",
+							color: "white",
+
 							fontWeight: "500",
 						}}
 					>
@@ -77,6 +80,8 @@ function Header(props) {
 						style={{
 							marginRight: "5rem",
 							fontFamily: "Segoe UI",
+							color: "white",
+
 							fontWeight: "500",
 						}}
 					>
@@ -90,6 +95,8 @@ function Header(props) {
 						style={{
 							marginRight: "5rem",
 							fontFamily: "Segoe UI",
+							color: "white",
+
 							fontWeight: "800",
 						}}
 					>
